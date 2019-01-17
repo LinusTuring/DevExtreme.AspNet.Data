@@ -1,16 +1,16 @@
 {
-  "name": "devextreme-aspnet-data",
+  "name": "ci-aspnet-data",
   "title": "DevExtreme.AspNet.Data",
-  "version": "99.0.0",
-  "description": "%meta_description%",
-  "homepage": "%meta_project_url%",
+  "version": "2.1.0",
+  "description": "DevExtreme data layer extension for ASP.NET",
+  "homepage": "https://github.com/ComIn-IT/DevExtreme.AspNet.Data",
   "license": "MIT",
   "author": {
-    "name": "%meta_company%"
+    "name": "Com In GmbH & Co. KG Consulting + Solutions"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DevExpress/DevExtreme.AspNet.Data.git"
+    "url": "https://github.com/ComIn-IT/DevExtreme.AspNet.Data.git"
   },
   "main": "js/dx.aspnet.data.js",
   "types": "js/dx.aspnet.data.d.ts",

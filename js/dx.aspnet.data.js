@@ -1,4 +1,5 @@
-// https://github.com/DevExpress/DevExtreme.AspNet.Data
+// Version: 2.1.0 - modified by Com In GmbH & Co. KG Consulting + Solutions
+// https://github.com/ComIn-IT/DevExtreme.AspNet.Data
 // Copyright (c) Developer Express Inc.
 
 /* global DevExpress:false, jQuery:false */
@@ -46,6 +47,8 @@
             insertUrl = options.insertUrl,
             deleteUrl = options.deleteUrl,
             onBeforeSend = options.onBeforeSend,
+            onAfterSend = options.onAfterSend,
+            onXhrFinished = options.onXhrFinished,
             onAjaxError = options.onAjaxError;
 
         function send(operation, requiresKey, ajaxSettings, customSuccessHandler) {
@@ -64,7 +67,7 @@
                 if(onBeforeSend)
                     onBeforeSend(operation, ajaxSettings);
 
-                $.ajax(ajaxSettings)
+                const jqxhr = $.ajax(ajaxSettings)
                     .done(function(res, textStatus, xhr) {
                         if(customSuccessHandler)
                             customSuccessHandler(d, res, xhr);
@@ -84,7 +87,14 @@
                             d.reject(error);
                         else
                             d.reject(xhr, textStatus);
+                    })
+                    .always(function() {
+                        if(onXhrFinished)
+                            onXhrFinished(operation, ajaxSettings, jqxhr);
                     });
+
+                if(onAfterSend)
+                    onAfterSend(operation, ajaxSettings, jqxhr);
             }
 
             return d.promise();

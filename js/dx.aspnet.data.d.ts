@@ -1,5 +1,8 @@
 import CustomStore from "devextreme/data/custom_store";
 
+export type AfterSend = (operation: string, ajaxSettings: JQueryAjaxSettings, jqxhr: JQueryXHR) => void;
+export type XhrFinished = (operation: string, ajaxSettings: JQueryAjaxSettings, jqxhr: JQueryXHR) => void;
+
 interface Options {
     key?: string|Array<string>,
     errorHandler?: (e: Error) => void,
@@ -18,6 +21,8 @@ interface Options {
     deleteMethod?: string,
 
     onBeforeSend?: (operation: string, ajaxSettings: JQueryAjaxSettings) => void,
+    onAfterSend?: AfterSend
+    onXhrFinished?: XhrFinished
     onAjaxError?: (e: { xhr: JQueryXHR, error: string | Error }) => void
 }
 

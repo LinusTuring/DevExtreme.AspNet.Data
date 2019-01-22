@@ -117,7 +117,7 @@
 
             if(options) {
 
-                ["skip", "take", "requireTotalCount", "requireGroupCount"].forEach(function(i) {
+                ["skip", "take", "requireTotalCount", "requireGroupCount", "isLoadingAll"].forEach(function(i) {
                     if(i in options)
                         result[i] = options[i];
                 });

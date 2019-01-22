@@ -1,7 +1,7 @@
 {
   "name": "ci-aspnet-data",
   "title": "DevExtreme.AspNet.Data",
-  "version": "2.1.0",
+  "version": "2.1.0.1",
   "description": "DevExtreme data layer extension for ASP.NET",
   "homepage": "https://github.com/ComIn-IT/DevExtreme.AspNet.Data",
   "license": "MIT",

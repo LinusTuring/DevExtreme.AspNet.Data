@@ -1,4 +1,4 @@
-// Version: 2.1.0 - modified by Com In GmbH & Co. KG Consulting + Solutions
+// Version: 2.1.0.1 - modified by Com In GmbH & Co. KG Consulting + Solutions
 // https://github.com/ComIn-IT/DevExtreme.AspNet.Data
 // Copyright (c) Developer Express Inc.
 

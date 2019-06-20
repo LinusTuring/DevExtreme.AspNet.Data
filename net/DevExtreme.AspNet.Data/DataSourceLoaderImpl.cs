@@ -61,7 +61,7 @@ namespace DevExtreme.AspNet.Data {
                     result.groupCount = groupingResult.Groups.Count();
             } else {
                 var deferPaging = Context.HasGroups || !Context.UseRemoteGrouping && !Context.SummaryIsTotalCountOnly && Context.HasSummary;
-                var loadExpr = Builder.BuildLoadExpr(Source.Expression, !deferPaging);
+                var loadExpr = Builder.BuildLoadExpr(Source.Expression, !deferPaging, Context.IsDistinctQuery);
 
                 if(Context.HasAnySelect) {
                     ContinueWithGrouping(
@@ -130,7 +130,7 @@ namespace DevExtreme.AspNet.Data {
         }
 
         int ExecCount() {
-            var expr = Builder.BuildCountExpr(Source.Expression);
+            var expr = Builder.BuildCountExpr(Source.Expression, Context.IsDistinctQuery);
 #if DEBUG
             ExpressionWatcher?.Invoke(expr);
 #endif
@@ -140,7 +140,7 @@ namespace DevExtreme.AspNet.Data {
         RemoteGroupingResult ExecRemoteGrouping() {
             return RemoteGroupTransformer.Run(
                 typeof(S),
-                ExecExpr<AnonType>(Source, Builder.BuildLoadGroupsExpr(Source.Expression)),
+                ExecExpr<AnonType>(Source, Builder.BuildLoadGroupsExpr(Source.Expression, Context.IsDistinctQuery)),
                 Context.HasGroups ? Context.Group.Count : 0,
                 Context.TotalSummary,
                 Context.GroupSummary

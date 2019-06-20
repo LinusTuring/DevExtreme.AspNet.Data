@@ -30,6 +30,11 @@ namespace DevExtreme.AspNet.Data {
         public bool IsCountQuery { get; set; }
 
         /// <summary>
+		/// A flag indicating whether the current query is made to get the unique data objects.
+		/// </summary>
+		public bool IsDistinctQuery { get; set; }
+
+        /// <summary>
         /// The number of data objects to be skipped from the start of the resulting set.
         /// </summary>
         public int Skip { get; set; }

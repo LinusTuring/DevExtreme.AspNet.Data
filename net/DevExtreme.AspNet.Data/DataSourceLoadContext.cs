@@ -34,6 +34,11 @@ namespace DevExtreme.AspNet.Data {
         public bool IsCountQuery => _options.IsCountQuery;
     }
 
+    // Distinct
+    partial class DataSourceLoadContext {
+        public bool IsDistinctQuery => _options.IsDistinctQuery;
+    }
+
     // Paging
     partial class DataSourceLoadContext {
         public int Skip => _options.Skip;

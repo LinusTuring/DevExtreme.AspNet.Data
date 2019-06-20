@@ -17,19 +17,19 @@ namespace DevExtreme.AspNet.Data {
             _anonTypeNewTweaks = anonTypeNewTweaks;
         }
 
-        public Expression BuildLoadExpr(Expression source, bool paginate = true) {
-            return BuildCore(source, paginate: paginate);
+        public Expression BuildLoadExpr(Expression source, bool paginate = true, bool isDistinctQuery = false) {
+            return BuildCore(source, paginate: paginate, isDistinctQuery: isDistinctQuery);
         }
 
-        public Expression BuildCountExpr(Expression source) {
-            return BuildCore(source, isCountQuery: true);
+        public Expression BuildCountExpr(Expression source, bool isDistinctQuery = false) {
+            return BuildCore(source, isCountQuery: true, isDistinctQuery: isDistinctQuery);
         }
 
-        public Expression BuildLoadGroupsExpr(Expression source) {
-            return BuildCore(source, remoteGrouping: true);
+        public Expression BuildLoadGroupsExpr(Expression source, bool isDistinctQuery = false) {
+            return BuildCore(source, isDistinctQuery: isDistinctQuery, remoteGrouping: true);
         }
 
-        Expression BuildCore(Expression expr, bool paginate = false, bool isCountQuery = false, bool remoteGrouping = false) {
+        Expression BuildCore(Expression expr, bool paginate = false, bool isCountQuery = false, bool isDistinctQuery = false, bool remoteGrouping = false) {
             var queryableType = typeof(Queryable);
             var genericTypeArguments = new[] { typeof(T) };
 
@@ -48,6 +48,9 @@ namespace DevExtreme.AspNet.Data {
                     expr = new RemoteGroupExpressionCompiler<T>(_guardNulls, _anonTypeNewTweaks, _context.Group, _context.TotalSummary, _context.GroupSummary).Compile(expr);
                 }
 
+                if(isDistinctQuery)
+                    expr = Expression.Call(queryableType, "Distinct", genericTypeArguments, expr);
+
                 if(paginate) {
                     if(_context.Skip > 0)
                         expr = Expression.Call(queryableType, "Skip", genericTypeArguments, expr, Expression.Constant(_context.Skip));
@@ -57,8 +60,12 @@ namespace DevExtreme.AspNet.Data {
                 }
             }
 
-            if(isCountQuery)
+            if(isCountQuery) {
+                if(isDistinctQuery)
+                    expr = Expression.Call(queryableType, "Distinct", genericTypeArguments, expr);
+
                 expr = Expression.Call(queryableType, "Count", genericTypeArguments, expr);
+            }
 
             return expr;
         }

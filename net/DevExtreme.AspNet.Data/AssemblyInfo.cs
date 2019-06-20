@@ -8,7 +8,3 @@ using System.Runtime.CompilerServices;
 #endif
 
 [assembly: CLSCompliant(true)]
-
-#if !DEBUG
-[assembly: AssemblyKeyFile("release.snk")]
-#endif

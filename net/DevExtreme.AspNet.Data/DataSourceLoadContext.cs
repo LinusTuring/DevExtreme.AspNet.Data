@@ -134,7 +134,7 @@ namespace DevExtreme.AspNet.Data {
 
         bool HasDefaultSort => !String.IsNullOrEmpty(DefaultSort);
 
-        public IEnumerable<SortingInfo> GetFullSort() {
+        public IEnumerable<SortingInfo> GetFullSort(bool useAnonTypeNames = false) {
             var memo = new HashSet<string>();
             var result = new List<SortingInfo>();
 
@@ -149,6 +149,17 @@ namespace DevExtreme.AspNet.Data {
             }
 
             if(HasSort) {
+
+                if (useAnonTypeNames) {
+                    SortingInfo[] newSortingInfo = new SortingInfo[_options.Sort.Length];
+
+                    for(int i = 0; i < _options.Sort.Length; i++) {
+                        newSortingInfo[i] = new SortingInfo() { Desc = _options.Sort[i].Desc, Selector = AnonType.IndexToField(i) };
+                    }
+
+                    _options.Sort = newSortingInfo;
+                }
+
                 foreach(var s in _options.Sort) {
                     if(memo.Contains(s.Selector))
                         continue;

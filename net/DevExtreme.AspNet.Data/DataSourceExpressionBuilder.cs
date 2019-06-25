@@ -3,6 +3,7 @@ using DevExtreme.AspNet.Data.Types;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace DevExtreme.AspNet.Data {
 
@@ -38,18 +39,31 @@ namespace DevExtreme.AspNet.Data {
 
             if(!isCountQuery) {
                 if(!remoteGrouping) {
-                    if(_context.HasAnySort)
-                        expr = new SortExpressionCompiler<T>(_guardNulls).Compile(expr, _context.GetFullSort());
-                    if(_context.HasAnySelect && _context.UseRemoteSelect) {
-                        expr = new SelectExpressionCompiler<T>(_guardNulls).Compile(expr, _context.FullSelect);
-                        genericTypeArguments = expr.Type.GetGenericArguments();
+                    if(!isDistinctQuery) {
+                        if(_context.HasAnySort)
+                            expr = new SortExpressionCompiler<T>(_guardNulls).Compile(expr, _context.GetFullSort());
+                        if(_context.HasAnySelect && _context.UseRemoteSelect) {
+                            expr = new SelectExpressionCompiler<T>(_guardNulls).Compile(expr, _context.FullSelect);
+                            genericTypeArguments = expr.Type.GetGenericArguments();
+                        }
+                    } else {
+                        if(_context.HasAnySelect && _context.UseRemoteSelect) {
+                            expr = new SelectExpressionCompiler<T>(_guardNulls).Compile(expr, _context.FullSelect);
+                            genericTypeArguments = expr.Type.GetGenericArguments();
+                        }
+
+                        expr = Expression.Call(queryableType, "Distinct", genericTypeArguments, expr);
+
+                        if(_context.HasAnySort) {
+                            Type sortExpressionCompilerType = typeof(SortExpressionCompiler<>).MakeGenericType(genericTypeArguments[0]);
+                            object sortExpressionCompilerInstance = Activator.CreateInstance(sortExpressionCompilerType, new object[] { _guardNulls });
+                            MethodInfo methodCompile = sortExpressionCompilerType.GetMethod("Compile");
+                            expr = (Expression)methodCompile.Invoke(sortExpressionCompilerInstance, new object[] { expr, _context.GetFullSort(true) });
+                        }
                     }
                 } else {
                     expr = new RemoteGroupExpressionCompiler<T>(_guardNulls, _anonTypeNewTweaks, _context.Group, _context.TotalSummary, _context.GroupSummary).Compile(expr);
                 }
-
-                if(isDistinctQuery)
-                    expr = Expression.Call(queryableType, "Distinct", genericTypeArguments, expr);
 
                 if(paginate) {
                     if(_context.Skip > 0)

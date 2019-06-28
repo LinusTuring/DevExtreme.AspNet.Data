@@ -66,13 +66,13 @@ namespace DevExtreme.AspNet.Data.Tests {
                 + "I4 = g.Min(obj => obj.Value), "
                 + "I5 = g.Max(obj => obj.Value), "
                 + "I6 = g.Sum(obj => obj.Value), "  // avg sum
-                + "I7 = g.Count(), "                // avg count
+                + "I7 = g.Sum(obj => 1), "          // avg null counter sum
                 // (count skipped)
 
                 // group summary
                 // (count skipped)
-                + "I8 = g.Sum(obj => obj.Nullable), "                               // avg sum
-                + "I9 = g.Select(obj => IIF((obj.Nullable != null), 1, 0)).Sum(), " // avg count
+                + "I8 = g.Sum(obj => obj.Nullable), "                            // avg sum
+                + "I9 = g.Sum(obj => IIF((obj.Nullable != null), 1, 0)), " // avg null counter sum
                 + "I10 = g.Max(obj => obj.Nullable), "
                 + "I11 = g.Min(obj => obj.Nullable), "
                 + "I12 = g.Sum(obj => obj.Nullable)"

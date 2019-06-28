@@ -12,7 +12,7 @@ namespace DevExtreme.AspNet.Data.Aggregation {
             COUNT = "count";
 
         public const string
-            COUNT_NOT_NULL = "cnn",
+            SUM_NOT_NULL = "snn",
             REMOTE_COUNT = "remoteCount",
             REMOTE_AVG = "remoteAvg";
     }

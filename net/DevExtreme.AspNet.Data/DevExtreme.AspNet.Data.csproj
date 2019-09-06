@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.1</Version>
-    <PackageId>DevExtreme.AspNet.Data</PackageId>
+    <Version>2.1.1</Version>
+    <PackageId>Devart.DevExtreme.AspNet.Data</PackageId>
     <Description>DevExtreme data layer extension for ASP.NET</Description>
-    <Authors>Developer Express Inc.</Authors>
+    <Authors>Developer Express Inc., Linus Turing</Authors>
     <Copyright>Copyright (c) Developer Express Inc.</Copyright>
-    <PackageProjectUrl>https://github.com/ComIn-IT/DevExtreme.AspNet.Data</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/LinusTuring/DevExtreme.AspNet.Data</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://secure.gravatar.com/avatar/6b38f1e9ffd8b069bcdc2741934fdbcf?s=512&amp;r=g</PackageIconUrl>
   </PropertyGroup>
@@ -19,8 +19,9 @@
     <DocumentationFile>bin\Debug\$(TargetFramework)\DevExtreme.AspNet.Data.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
     <LangVersion>latest</LangVersion>
-    <FileVersion>2.1.0.1</FileVersion>
+    <FileVersion>2.1.1</FileVersion>
     <Company>Developer Express Inc.</Company>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

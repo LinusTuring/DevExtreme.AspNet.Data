@@ -1,16 +1,16 @@
 {
-  "name": "ci-aspnet-data",
+  "name": "devextreme-aspnet-data-cancelable",
   "title": "DevExtreme.AspNet.Data",
-  "version": "2.1.0.1",
+  "version": "2.1.1",
   "description": "DevExtreme data layer extension for ASP.NET",
-  "homepage": "https://github.com/ComIn-IT/DevExtreme.AspNet.Data",
+  "homepage": "https://github.com/LinusTuring/DevExtreme.AspNet.Data",
   "license": "MIT",
   "author": {
-    "name": "Com In GmbH & Co. KG Consulting + Solutions"
+    "name": "Linus Turing"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ComIn-IT/DevExtreme.AspNet.Data.git"
+    "url": "https://github.com/LinusTuring/DevExtreme.AspNet.Data"
   },
   "main": "js/dx.aspnet.data.js",
   "types": "js/dx.aspnet.data.d.ts",

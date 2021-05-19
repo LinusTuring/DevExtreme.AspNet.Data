@@ -4,20 +4,26 @@
 (function(factory) {
     "use strict";
 
+    function unwrapESModule(module) {
+        return module && module.__esModule && module.default ? module.default : module;
+    }
+
     if(typeof define === "function" && define.amd) {
         define(function(require) {
             factory(
-                require("xhr-mock").default,
-                require("devextreme/core/version"),
-                require("devextreme/data/data_source"),
+                unwrapESModule(require("xhr-mock")),
+                unwrapESModule(require("devextreme/core/version")),
+                unwrapESModule(require("devextreme/data/data_source")),
+                unwrapESModule(require("devextreme/core/utils/ajax")),
                 require(ASPNET_DATA_SCRIPT)
             );
         });
     } else if (typeof module === "object" && module.exports) {
         module.exports = factory(
-            require("xhr-mock").default,
-            require("devextreme/core/version"),
-            require("devextreme/data/data_source"),
+            unwrapESModule(require("xhr-mock")),
+            unwrapESModule(require("devextreme/core/version")),
+            unwrapESModule(require("devextreme/data/data_source")),
+            unwrapESModule(require("devextreme/core/utils/ajax")),
             require(ASPNET_DATA_SCRIPT)
         );
     } else {
@@ -34,6 +40,11 @@
 
     // https://github.com/karma-runner/karma-qunit/issues/57
     var QUnit = window.QUnit;
+
+    if(typeof devextremeVersion === "object")
+        devextremeVersion = devextremeVersion.version;
+
+    devextremeVersion = devextremeVersion.split(".").map(Number);
 
     var createStore = AspNet.createStore,
         NEVER_RESOLVE = new Promise(function() { });

@@ -13,6 +13,6 @@ let store = AspNetData.createStore({
     }
 })
 
-store.load({ sort: "name" }).done(r => {
+store.load({ sort: "name" }).then(r => {
 
 })

@@ -14,18 +14,14 @@
     if(typeof define === "function" && define.amd) {
         define(function(require, exports, module) {
             module.exports = factory(
-                unwrapESModule(require("devextreme/core/utils/ajax")),
-                require("jquery").Deferred,
-                require("jquery").extend,
+                require("jquery"),
                 unwrapESModule(require("devextreme/data/custom_store")),
                 unwrapESModule(require("devextreme/data/utils"))
             );
         });
     } else if (typeof module === "object" && module.exports) {
         module.exports = factory(
-            unwrapESModule(require("devextreme/core/utils/ajax")),
-            require("jquery").Deferred,
-            require("jquery").extend,
+            require("jquery"),
             unwrapESModule(require("devextreme/data/custom_store")),
             unwrapESModule(require("devextreme/data/utils"))
         );

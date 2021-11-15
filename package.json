@@ -1,7 +1,7 @@
 {
   "name": "devextreme-aspnet-data-cancelable",
   "title": "DevExtreme.AspNet.Data",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "DevExtreme data layer extension for ASP.NET",
   "homepage": "https://github.com/LinusTuring/DevExtreme.AspNet.Data",
   "license": "MIT",
